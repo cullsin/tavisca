@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+body {
+    font-family: 'Abel', cursive;
+}
+  
+
+.action-hand {
+    cursor:pointer;
+}
+
+.loading {
+    position: fixed;
+    right: 20px;
+    z-index: -1;
+}
+
+.form-error {
+    color: red;
+    align-items: right
+}
+
+.list-menu li {
+    padding: 0px !important;
+}
+
+.min-height {
+    min-height : 77vh;
+}
+
+.top-gap {
+    margin-top:10%;
+}
+
+.logo-size {
+    width: 45px;
+    height: 45px;
+}
+
+.message-p {
+    min-height : 100px;
+}
