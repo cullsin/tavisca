@@ -3,6 +3,7 @@
 namespace PhalconRest\Controllers\Business;
 use \PhalconRest\Exceptions\HTTPException;
 use \PhalconRest\Models\Utils\Helper;
+use \PhalconRest\Models\Utils\StatusCode as StatusCode;
 use \PhalconRest\Models\Business\Card;
 use MongoDB\BSON\ObjectId as MongoId;
 use MongoDB\BSON\Regex;
@@ -13,6 +14,7 @@ class CardController extends \PhalconRest\Controllers\RESTController {
 
                 $input = $this->input;
                 $keyword = isset($input['keyword']) ? $input['keyword'] : '.*';
+		$keyword = quotemeta($keyword);
                 $regexQuery = new Regex(".*$keyword.*");
                 $query = [
                         '$or' => [
@@ -43,6 +45,11 @@ class CardController extends \PhalconRest\Controllers\RESTController {
                 	$params = [ [ '_id' => $id ] ];
                 	$card = Card::findFirst($params);
 		}
+
+		$ex_card = Card::findFirst([[ 'name' => trim($input['name']) ]]);
+		if($ex_card) {
+			return $this->getMessageFailure('MEQ03');	
+		}		
 
                 if(!$card)
                 $card = new Card();

@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Page from 'layout/main/desktop/page'
-import Card from 'layout/desktop/card'
-import Task from 'layout/desktop/task'
+
+const Card = React.lazy(() => import('layout/desktop/card'));
+const Task = React.lazy(() => import('layout/desktop/task'));
 
 class Router extends Component {
     render() {
-      return (  
+      return (
+        <Suspense fallback={<React.Fragment />}>  
         <Switch>
             <React.Fragment>
               <Route exact path='/' component={Page} />
@@ -15,6 +17,7 @@ class Router extends Component {
               <Route exact path='/card/:id/tasks' component={Page} />
             </React.Fragment>
         </Switch>
+        </Suspense>
       );
     }
 }

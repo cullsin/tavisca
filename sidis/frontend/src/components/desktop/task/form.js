@@ -10,7 +10,7 @@ class CardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      serverError: '',  
+      serverError: false,  
       error: {
          isEmpty : false
       },  
@@ -24,6 +24,8 @@ class CardForm extends Component {
     const object = this.state;
     const value = event.target.value;
     object[event.target.name] = value
+    object.error.isEmpty = false;
+    object.serverError = false;
     this.setState(object);
   }
 
@@ -76,7 +78,7 @@ class CardForm extends Component {
                 placeholder="Name"
                 maxLength={200}
                 value={this.state.name}  
-                onChange={this.handleChange}  invalid={this.state.error.isEmpty} />
+                onChange={this.handleChange}  invalid={this.state.error.isEmpty || this.state.serverError} />
                 { this.state.error.isEmpty && 
                     <FormFeedback>Task cannot be empty </FormFeedback> }
                 { this.state.serverError  && 

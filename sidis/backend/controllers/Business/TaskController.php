@@ -14,6 +14,7 @@ class TaskController extends \PhalconRest\Controllers\RESTController {
 
                 $input = $this->input;
                 $keyword = isset($input['keyword']) ? $input['keyword'] : '.*';
+		$keyword = quotemeta($keyword);
                 $regexQuery = new Regex(".*$keyword.*");
                 $query = [
 			'card_id' => $input['card_id'],

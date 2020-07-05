@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import {NotificationContainer} from 'react-notifications';
-import Home from '../layout/main/home';
+import React, { Component, lazy, Suspense } from 'react';
+const Home = lazy(() => import('layout/main/home'));
 
 class App extends Component {
-
   render() { 
     return (
+      <Suspense fallback={<h1> Task Runner is loading </h1>}>
       <React.Fragment>
-      <NotificationContainer />
         <Home />
       </React.Fragment>
+      </Suspense>
     );  
   }
 }
